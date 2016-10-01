@@ -1,0 +1,24 @@
+---
+- name: Check Updates
+  hosts: WIN-AWS-001
+  gather_facts: false
+  tasks:
+    - name: Check for updates, but don't install
+      win_updates:
+        state: searched
+        category_names:
+          - Application
+          - Connectors
+          - DefinitionUpdates
+          - DeveloperKits
+          - FeaturePacks
+          - Guidance
+          - ServicePacks
+          - Tools
+          - UpdateRollups
+          - CriticalUpdates
+          - SecurityUpdates
+        log_path: c:/ansible_wu.txt
+      register: update_result
+
+    - debug: var=update_result

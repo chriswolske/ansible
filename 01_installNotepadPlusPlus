@@ -1,0 +1,6 @@
+---
+- hosts: WIN-AWS-001
+  tasks:
+  - name: install Notepad++
+    win_chocolatey:
+      name: notepadplusplus.install

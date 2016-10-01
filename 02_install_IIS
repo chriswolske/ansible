@@ -1,0 +1,13 @@
+# Playbook example
+---
+- name: Install IIS
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install IIS
+      win_feature:
+        name: "Web-Server"
+        state: present
+        restart: yes
+        include_sub_features: no # was yes
+        include_management_tools: yes
