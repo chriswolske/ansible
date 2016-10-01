@@ -1,0 +1,7 @@
+---
+- name: install Datadog for Windows
+  hosts: windows
+  gather_facts: false
+  tasks:
+    - name: make director
+      win_command: whoami

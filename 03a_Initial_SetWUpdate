@@ -8,7 +8,7 @@
 
     - name: Check for updates, but don't install
       win_updates:
-        # state: searched
+        state: searched
         category_names:
           - Application
           - Connectors
