@@ -1,7 +1,21 @@
 ---
-- name: install Datadog for Windows
+- name: Datadog for Windows
   hosts: windows
   gather_facts: false
   tasks:
-    - name: make director
-      win_command: whoami
+    - name: make sure there is a tmp dir
+      win_file: 
+        path: /tmp/
+        state: directory
+    - name: Check if Datadog is running
+      win_service:
+        name: DatadogAgent
+        register: result
+
+    - name: copy the datadog MSI to the node
+      win_copy: src=ddagent-cli.msi dest=c:/tmp/ddagent-cli.msi
+    
+    - name: install the MSI
+      win_msi: 
+        path: 'c:\tmp\ddagent-cli.msi'
+        extra_args: 'APIKEY="7d8f7e52f372992e0fd82b8dbebccdbe"'
