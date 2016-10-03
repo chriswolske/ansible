@@ -1,0 +1,17 @@
+---
+- name: install SQL2016
+  hosts: WIN-AWS-001
+  gather_facts: false
+  tasks:
+    - name: make sure there is a tmp directory
+      win_file:
+        path: /tmp/
+        state: directory
+    - win_get_url:
+        force: no
+        url: http://10.10.99.29/en_sql_server_2016_enterprise_x64_dvd_8701793.iso
+        dest: /tmp/sql_server_2016.iso
+    - name: Mount the ISO
+      raw: Mount-DiskImage -ImagePath c:\tmp\sql_server_2016.iso
+      register: result
+
